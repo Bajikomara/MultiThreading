@@ -1,16 +1,18 @@
 package Lectures.Section4_MultiThreading;
 
-class Runner1{
-    public void execute(){
-        for(int i= 0; i < 10 ; i ++){
+class Runner1 implements Runnable {
+    @Override
+    public void run() {
+        for(int i= 0; i < 100 ; i ++){
             System.out.println("Runner 1: " + i);
         }
     }
 }
 
-class Runner2{
-    public void execute(){
-        for(int i= 0; i < 10 ; i ++){
+class Runner2 implements Runnable {
+    @Override
+    public void run() {
+        for(int i= 0; i < 100 ; i ++){
             System.out.println("Runner 2: " + i);
         }
     }
@@ -19,11 +21,30 @@ class Runner2{
 public class TheradsManipulation {
 
     public static void main(String[] args) {
-        Runner1 runner1 = new Runner1();
-        Runner2 runner2 = new Runner2();
 
-        runner1.execute();
-        runner2.execute();
+//        Thread t1 = new Thread(new Runner1());
+//        Thread t2 = new Thread(new Runner2());
+
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    System.out.println("Runner 1: " + i);
+                }
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    System.out.println("Runner 2: " + i);
+                }
+            }
+        });
+
+        t1.start();
+        t2.start();
 
     }
 }
