@@ -3,22 +3,17 @@ package Lectures.Section5_InterThreadCommunication;
 public class InterThreadCommunication {
     public static Integer counter1 = 0;
     public static Integer counter2 = 0;
-    //because App object has a single lock: this why the methods
-    // cannot be executed "at the same time"-time slicing algorithm
-//    public static synchronized void increement1(){
-//        counter1++;
-//    }
+
+    private static final Object lock1 = new Object();
+    private static final Object lock2 = new Object();
 
     public static  void increement1(){
-//        class level locking
-//        rule of thumb: we synchronize blocks that are 100% necessary
-        synchronized (InterThreadCommunication.class){
+        synchronized (lock1){
             counter1++;
         }
     }
-
     public static synchronized void increement2(){
-        synchronized (InterThreadCommunication.class){
+        synchronized (lock2){
             counter2++;
         }
     }
