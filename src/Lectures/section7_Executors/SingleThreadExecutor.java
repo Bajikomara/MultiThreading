@@ -11,7 +11,7 @@ class Task implements Runnable {
     }
     @Override
     public void run() {
-        System.out.println("Task with id " + id + " is in work-thread id: " + Thread.currentThread().getId());
+        System.out.println("Task with id " + id + " is in work-thread id: " + Thread.currentThread().getName());
         long duration = (long) Math.random()*5;
         try {
             TimeUnit.SECONDS.sleep(duration);
